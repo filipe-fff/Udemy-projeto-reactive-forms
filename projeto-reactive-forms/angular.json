@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "projeto-react-forms": {
+    "projeto-reactive-forms": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/projeto-react-forms",
+            "outputPath": "dist/projeto-reactive-forms",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "projeto-react-forms:build:production"
+              "buildTarget": "projeto-reactive-forms:build:production"
             },
             "development": {
-              "buildTarget": "projeto-react-forms:build:development"
+              "buildTarget": "projeto-reactive-forms:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "projeto-react-forms:build"
+            "buildTarget": "projeto-reactive-forms:build"
           }
         },
         "test": {
@@ -113,6 +113,6 @@
     }
   },
   "cli": {
-    "analytics": "72b43435-adb5-44da-b05a-b4ce856075db"
+    "analytics": "b70da709-6235-4467-a521-0a1fe64a4312"
   }
 }
