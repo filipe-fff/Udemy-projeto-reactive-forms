@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class UserInfosItemComponent {
   @Input({ required: true }) title!: string;
-  @Input({ required: true }) description!: string;
+  @Input({ required: true }) description!: string | null;
 }
