@@ -5,7 +5,9 @@
         </mat-card-content>
 
         <mat-tab-group class="m-4" [(selectedIndex)]="tabSelectedIndex">
-            <mat-tab label="Geral">geral</mat-tab>
+            <mat-tab label="Geral">
+                <app-general-informations></app-general-informations>
+            </mat-tab>
             <mat-tab label="Contato">contato</mat-tab>
             <mat-tab label="Dependente">dependente</mat-tab>
         </mat-tab-group>
