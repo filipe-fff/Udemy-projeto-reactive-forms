@@ -4,6 +4,8 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { UsersListComponent } from './users-list/users-list.component';
 import { GeneralInformationsComponent } from './general-informations/general-informations.component';
 import { UserInfosItemComponent } from './user-infos-item/user-infos-item.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { MaritalStatusPipe } from '../pipes/marital-status.pipe';
 
 
 
@@ -16,8 +18,10 @@ import { UserInfosItemComponent } from './user-infos-item/user-infos-item.compon
   imports: [
     CommonModule,
     AngularMaterialModule,
+    PipesModule,
   ],
   exports: [
+    PipesModule,
     UsersListComponent,
     GeneralInformationsComponent,
   ]
