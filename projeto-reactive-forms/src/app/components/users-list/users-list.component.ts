@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UsersList } from '../../types/users-list';
+
 
 @Component({
   selector: 'app-users-list',
@@ -8,4 +9,9 @@ import { UsersList } from '../../types/users-list';
 })
 export class UsersListComponent {
   @Input({ required: true }) usersList: UsersList | undefined = [];
+  @Output("onUserSelected") onUserSelectedEmitt = new EventEmitter<number>();
+
+  onUserSelected(userIndex: number) {
+    this.onUserSelectedEmitt.emit(userIndex);
+  }
 }
