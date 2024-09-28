@@ -1,6 +1,13 @@
 <div class="p-4">
     <mat-card class="max-w-5xl m-auto">
-        <mat-card-header></mat-card-header>
-        <mat-card-content>j</mat-card-content>
+        <mat-card-content>
+            <app-users-list [usersList]="usersList"></app-users-list>
+        </mat-card-content>
+
+        <mat-tab-group class="m-4" [(selectedIndex)]="tabSelectedIndex">
+            <mat-tab label="Geral">geral</mat-tab>
+            <mat-tab label="Contato">contato</mat-tab>
+            <mat-tab label="Dependente">dependente</mat-tab>
+        </mat-tab-group>
     </mat-card>
 </div>
