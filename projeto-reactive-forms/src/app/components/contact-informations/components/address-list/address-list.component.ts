@@ -7,5 +7,7 @@ import { AddressList } from '../../../../types/address-list';
   styleUrl: './address-list.component.scss'
 })
 export class AddressListComponent {
+  addressListDisplay: AddressList = [];
+  
   @Input({ required: true }) addressList: AddressList = [];
 }

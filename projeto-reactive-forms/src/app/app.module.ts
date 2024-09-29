@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { ComponentsModule } from './components/components.module';
 import { MaritalStatusPipe } from './pipes/marital-status.pipe';
+import { PipesModule } from './pipes/pipes.module';
 
 
 @NgModule({
