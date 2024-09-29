@@ -1,6 +1,6 @@
 <div class="grid gap-4 sm:grid-cols-3">
     <mat-card *ngFor="let user of usersList; let i = index" (click)="onUserSelected(i)">
-        <mat-card-header class="font-medium text-lg">{{ user.name }}</mat-card-header>
-        <mat-card-content>{{ user.email }}</mat-card-content>
+        <mat-card-header class="font-medium text-xl">{{ user.name }}</mat-card-header>
+        <mat-card-content class="text-gray-500 font-medium">{{ user.email }}</mat-card-content>
     </mat-card>
 </div>

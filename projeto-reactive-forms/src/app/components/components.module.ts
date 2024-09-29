@@ -7,6 +7,9 @@ import { UserInfosItemComponent } from './user-infos-item/user-infos-item.compon
 import { PipesModule } from '../pipes/pipes.module';
 import localePT from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { ContactInformationsComponent } from './contact-informations/contact-informations.component';
+import { PhoneListComponent } from './contact-informations/components/phone-list/phone-list.component';
+import { AddressListComponent } from './contact-informations/components/address-list/address-list.component';
 
 registerLocaleData(localePT, "pt-BR");
 
@@ -16,6 +19,9 @@ registerLocaleData(localePT, "pt-BR");
     UsersListComponent,
     GeneralInformationsComponent,
     UserInfosItemComponent,
+    ContactInformationsComponent,
+    PhoneListComponent,
+    AddressListComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,7 @@ registerLocaleData(localePT, "pt-BR");
     PipesModule,
     UsersListComponent,
     GeneralInformationsComponent,
+    ContactInformationsComponent,
   ],
   providers: [
     {

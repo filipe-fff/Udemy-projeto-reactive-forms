@@ -1,5 +1,5 @@
 <div class="p-4">
-    <mat-card class="max-w-5xl m-auto">
+    <mat-card class="max-w-screen-xl m-auto">
         <mat-card-content>
             <app-users-list
                 [usersList]="usersList"
@@ -11,7 +11,10 @@
             <mat-tab label="Geral">
                 <app-general-informations [userSelected]="userSelected"></app-general-informations>
             </mat-tab>
-            <mat-tab label="Contato">contato</mat-tab>
+            <mat-tab label="Contato">
+                <app-contact-informations
+                    [userSelected]="userSelected"></app-contact-informations>
+            </mat-tab>
             <mat-tab label="Dependente">dependente</mat-tab>
         </mat-tab-group>
     </mat-card>
