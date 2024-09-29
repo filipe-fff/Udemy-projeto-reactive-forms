@@ -1,11 +1,13 @@
 <p class="text-2xl font-semibold">Endereço:</p>
-<div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
-    <app-user-infos-item title="Tipo" [description]="'a'"></app-user-infos-item>
-    <app-user-infos-item title="Rua" [description]="'b'"></app-user-infos-item>
-    <app-user-infos-item title="Complemento" [description]="'c'"></app-user-infos-item>
-    <app-user-infos-item title="País" [description]="'d'"></app-user-infos-item>
-    <app-user-infos-item title="Estado" [description]="'e'"></app-user-infos-item>
-    <app-user-infos-item title="Cidade" [description]="'f'"></app-user-infos-item>
-</div>
-
-<hr class="lg:hidden">
+<ng-container *ngFor="let address of addressList">
+    <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
+        <app-user-infos-item title="Tipo" [description]="address.type.toString()"></app-user-infos-item>
+        <app-user-infos-item title="Rua" [description]="address.street"></app-user-infos-item>
+        <app-user-infos-item title="Complemento" [description]="address.complement"></app-user-infos-item>
+        <app-user-infos-item title="País" [description]="address.country"></app-user-infos-item>
+        <app-user-infos-item title="Estado" [description]="address.state"></app-user-infos-item>
+        <app-user-infos-item title="Cidade" [description]="address.city"></app-user-infos-item>
+    </div>
+    
+    <hr class="lg:hidden">
+</ng-container>

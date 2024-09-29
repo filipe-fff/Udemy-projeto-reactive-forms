@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AddressList } from '../../../../types/address-list';
 
 @Component({
   selector: 'app-address-list',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './address-list.component.scss'
 })
 export class AddressListComponent {
-
+  @Input({ required: true }) addressList: AddressList = [];
 }
