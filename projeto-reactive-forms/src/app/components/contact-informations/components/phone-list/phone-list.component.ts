@@ -27,7 +27,6 @@ export class PhoneListComponent implements OnChanges {
                 typeDescription: phone.typeDescription,
                 phoneNumber: phone.phoneNumber,
               });
-              console.log(this.phoneToDisplayList);
         })  
       }
   }

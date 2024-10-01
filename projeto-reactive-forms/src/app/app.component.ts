@@ -1,4 +1,4 @@
-import { Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit, SimpleChanges } from '@angular/core';
 import { take } from 'rxjs';
 import { UsersService } from './services/users.service';
 import { UsersList } from './types/users-list';
@@ -9,7 +9,7 @@ import { IUser } from './interfaces/users/user.interface';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   usersList: UsersList = [];
   userSelected: IUser = {} as IUser;
   userSelectedIndex: number | undefined;
@@ -23,16 +23,12 @@ export class AppComponent implements OnInit, OnChanges {
       this._usersService.getUsers().pipe(take(1)).subscribe((usersListResponse) => this.usersList = usersListResponse);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-      this.tabSelectedIndex = 0;
-  }
-
   onUserSelected(userIndex: number) {
+
     this.userSelectedIndex = userIndex;
+    this.tabSelectedIndex = 0;
     if(!this.usersList[userIndex]) return;
 
     this.userSelected = structuredClone(this.usersList[userIndex]);
-
-    console.log(this.userSelected);
   }
 }
