@@ -1,7 +1,7 @@
 <p class="text-2xl font-semibold">Endereço:</p>
-<ng-container *ngFor="let address of addressList">
+<ng-container *ngFor="let address of addressToDisplayList">
     <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
-        <app-user-infos-item title="Tipo" [description]="address.type.toString()"></app-user-infos-item>
+        <app-user-infos-item title="Tipo" [description]="address.typeDescription"></app-user-infos-item>
         <app-user-infos-item title="Rua" [description]="address.street"></app-user-infos-item>
         <app-user-infos-item title="Complemento" [description]="address.complement"></app-user-infos-item>
         <app-user-infos-item title="País" [description]="address.country"></app-user-infos-item>

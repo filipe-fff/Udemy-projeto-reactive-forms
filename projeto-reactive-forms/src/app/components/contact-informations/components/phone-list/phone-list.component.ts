@@ -15,19 +15,20 @@ export class PhoneListComponent implements OnChanges {
   @Input({ required: true }) phoneList: PhoneList = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-      this.phoneToDisplayList = [];
 
-      this.phoneList.map((phone) => {
+      const HAS_PHONE_LIST = changes["phoneList"].currentValue;
+      
+      if(HAS_PHONE_LIST) {
+        this.phoneToDisplayList = [];
 
-          preparePhoneList(this.phoneList, true, (phone) => {
-            this.phoneToDisplayList.push({
-              type: phone.type,
-              typeDescription: phone.typeDescription,
-              phoneNumber: phone.phoneNumber,
-            });
-            console.log(this.phoneToDisplayList);
-          })
-        }
-      );
+        preparePhoneList(this.phoneList, true, (phone) => {
+              this.phoneToDisplayList.push({
+                type: phone.type,
+                typeDescription: phone.typeDescription,
+                phoneNumber: phone.phoneNumber,
+              });
+              console.log(this.phoneToDisplayList);
+        })  
+      }
   }
 }

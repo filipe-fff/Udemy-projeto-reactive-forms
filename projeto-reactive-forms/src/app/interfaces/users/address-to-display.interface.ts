@@ -1,5 +1,5 @@
 import { IAddress } from "./address.interface";
 
-export interface IAddressTypeDescription extends IAddress {
+export interface IAddreesToDisplay extends IAddress {
     typeDescription: string;
 }

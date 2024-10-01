@@ -7,9 +7,9 @@ import { PhoneTypeDescriptionMap } from "./phone-type-description-map";
 
 export const preparePhoneList = (phoneList: PhoneList, isDisplayPhone: boolean, calback:(phone: IPhoneToDisplay) => void) => {
     
-    Object.keys(PhoneTypeEnum).map(Number).filter((phone) => !isNaN(phone)).forEach((phoneType: number) => {
+    Object.keys(PhoneTypeDescriptionMap).map(Number).forEach((phoneType: number) => {
         
-        const phoneFound = phoneList.find((phone) => phone.type === phoneType);
+        const phoneFound = phoneList.find((phone: IPhone) => phone.type === phoneType);
 
         let phoneNumber: string = "";
         

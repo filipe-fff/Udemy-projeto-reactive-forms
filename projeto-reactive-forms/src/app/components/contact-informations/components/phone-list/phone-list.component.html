@@ -2,7 +2,7 @@
 <div class="p-4 grid lg:grid-cols-3">
     <app-user-infos-item
         *ngFor="let phone of phoneToDisplayList"
-        [title]="phone.type.toString()"
+        [title]="phone.typeDescription"
         [description]="phone.phoneNumber"
         ></app-user-infos-item>
 </div>
