@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   userSelected: IUser = {} as IUser;
   userSelectedIndex: number | undefined;
 
+  isEditModel: boolean = true;
+
   tabSelectedIndex: number = 0;
 
   private readonly _usersService = inject(UsersService);
@@ -26,9 +28,18 @@ export class AppComponent implements OnInit {
   onUserSelected(userIndex: number) {
 
     this.userSelectedIndex = userIndex;
-    this.tabSelectedIndex = 0;
     if(!this.usersList[userIndex]) return;
 
     this.userSelected = structuredClone(this.usersList[userIndex]);
   }
+
+  onEditButton() {
+    this.isEditModel = true;
+  }
+
+  onCancelButton() {
+    this.isEditModel = false;
+  }
+
+  onSaveButton() {}
 }

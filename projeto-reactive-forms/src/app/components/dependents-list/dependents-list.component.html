@@ -5,3 +5,6 @@
     <app-user-infos-item title="Documento" [description]="dependent.document | cpf"></app-user-infos-item>
     <hr class="sm:hidden">
 </div>
+<p 
+    *ngIf="dependentsList?.length === 0"
+    class="text-lg pl-4 pb-4">O usuário não possui dependentes.</p>

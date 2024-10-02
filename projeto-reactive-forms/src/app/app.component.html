@@ -2,22 +2,22 @@
     <mat-card class="max-w-screen-xl m-auto">
         <mat-card-content>
             <app-users-list
+                *ngIf="usersList.length > 0"
                 [usersList]="usersList"
+                [isEditModel]="isEditModel"
                 (onUserSelected)="onUserSelected($event)"
                 ></app-users-list>
         </mat-card-content>
 
-        <mat-tab-group *ngIf="userSelected !== undefined" class="m-4" [(selectedIndex)]="tabSelectedIndex">
-            <mat-tab label="Geral">
-                <app-general-informations [userSelected]="userSelected"></app-general-informations>
-            </mat-tab>
-            <mat-tab label="Contato">
-                <app-contact-informations
-                    [userSelected]="userSelected"></app-contact-informations>
-            </mat-tab>
-            <mat-tab label="Dependente">
-                <app-dependents-list [dependentsList]="userSelected.dependentsList"></app-dependents-list>
-            </mat-tab>
-        </mat-tab-group>
+        <app-buttons-container
+            [isEditModel]="isEditModel"
+            (onEditButton)="onEditButton()"
+            (onCancelButton)="onCancelButton()"
+            (onSaveButton)="onSaveButton()"></app-buttons-container>
+
+        <app-user-informations-container
+            [userSelected]="userSelected"
+            [isEditModel]="isEditModel"
+            [tabSelectedIndex]="tabSelectedIndex"></app-user-informations-container>
     </mat-card>
 </div>

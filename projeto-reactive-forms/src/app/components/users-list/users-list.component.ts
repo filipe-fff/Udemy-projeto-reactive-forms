@@ -8,10 +8,15 @@ import { UsersList } from '../../types/users-list';
   styleUrl: './users-list.component.scss'
 })
 export class UsersListComponent {
-  @Input({ required: true }) usersList: UsersList | undefined = [];
+  userSelectedIndex: number | undefined;
+
+  @Input({ required: true }) usersList: UsersList = [];
+  @Input({ required: true }) isEditModel: boolean = false;
+
   @Output("onUserSelected") onUserSelectedEmitt = new EventEmitter<number>();
 
   onUserSelected(userIndex: number) {
+    this.userSelectedIndex = userIndex;
     this.onUserSelectedEmitt.emit(userIndex);
   }
 }
