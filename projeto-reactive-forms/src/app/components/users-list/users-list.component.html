@@ -3,7 +3,7 @@
         class="user-card-hover"
         *ngFor="let user of usersList; let i = index"
         [ngClass]="{
-            'user-card-disabled pointer-events-none': isEditModel && userSelectedIndex !== i,
+            'user-card-disabled': isEditModel && userSelectedIndex !== i,
             'user-selected': userSelectedIndex === i,
         }"
         (click)="onUserSelected(i)">

@@ -6,26 +6,22 @@ import { PhoneList } from "../../types/phone-list";
 @Injectable({
     providedIn: "root",
 })
-export class UserFormController implements OnInit, OnChanges {
+export class UserFormController {
     userSelectedControl: IUser = {} as IUser;
+    userForm: FormGroup = {} as FormGroup;
+    emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     private readonly _fb = inject(FormBuilder);
 
-    userForm: FormGroup = {} as FormGroup;
-
-    ngOnInit(): void {}
-
-    ngOnChanges(changes: SimpleChanges): void {
+    constructor() {
         this.createUserFormGroup();
-        this.getGeneralInformations();
-        console.log(this.userForm.getRawValue());
     }
 
     createUserFormGroup() {
         this.userForm = this._fb.group({
             generalInformations: this._fb.group({
                 name: ["", Validators.required],
-                email: ["", [Validators.required]],
+                email: ["", [Validators.required, Validators.pattern(this.emailPattern)]],
                 country: [""],
                 state: [""],
                 maritalStatus: [null],
@@ -40,18 +36,14 @@ export class UserFormController implements OnInit, OnChanges {
         });
     }
 
-    createPhoneList(phoneList: PhoneList) {
-        return phoneList.forEach((phone) => this._fb.group({
-            type: [null],
-            number: [null],
-        }));
-    }
-
-    getGeneralInformations() {
-        this.generalInformations.patchValue(this.userSelectedControl); 
+    getGeneralInformations(user: IUser) {
+        this.generalInformations.patchValue({
+            ...user,
+            birthDate: new Date(),
+        }); 
     }
 
     get generalInformations(): FormGroup {
-        return this.userForm.get("generalInformatios") as FormGroup;
+        return this.userForm.get("generalInformations") as FormGroup;
     }
 }

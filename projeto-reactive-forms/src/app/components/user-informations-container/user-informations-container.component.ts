@@ -19,6 +19,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
       if (USER_SELECTED) {
         this.tabSelectedIndex = 0;
         this.userSelectedControl = this.userSelected;
+
+        this.getGeneralInformations(this.userSelected);
       }
   }
 }
