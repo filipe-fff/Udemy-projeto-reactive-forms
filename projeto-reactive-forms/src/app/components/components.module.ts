@@ -10,6 +10,7 @@ import { registerLocaleData } from '@angular/common';
 import { ContactInformationsComponent } from './contact-informations/contact-informations.component';
 import { PhoneListComponent } from './contact-informations/components/phone-list/phone-list.component';
 import { AddressListComponent } from './contact-informations/components/address-list/address-list.component';
+import { DependentsListComponent } from './dependents-list/dependents-list.component';
 
 registerLocaleData(localePT, "pt-BR");
 
@@ -22,6 +23,7 @@ registerLocaleData(localePT, "pt-BR");
     ContactInformationsComponent,
     PhoneListComponent,
     AddressListComponent,
+    DependentsListComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ registerLocaleData(localePT, "pt-BR");
     UsersListComponent,
     GeneralInformationsComponent,
     ContactInformationsComponent,
+    DependentsListComponent,
   ],
   providers: [
     {
