@@ -1,5 +1,5 @@
-<form [formGroup]="generalInformations" class="p-8 grid gap-12">
-    <div class="grid gap-4 lg:grid-cols-3">
+<form [formGroup]="generalInformations" class="p-4 grid gap-12">
+    <div class="pad-4 grid gap-4 lg:grid-cols-3">
         <mat-form-field>
             <mat-label>Nome:</mat-label>
             <input formControlName="name" matInput type="text" placeholder="Ex: Fulano">
@@ -19,7 +19,7 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <div class="grid gap-4 lg:grid-cols-3">
+    <div class="pad-4 grid gap-4 lg:grid-cols-3">
         <mat-form-field>
             <mat-label>País:</mat-label>
             <input
@@ -46,10 +46,10 @@
             </mat-autocomplete>
         </mat-form-field>
     </div>
-    <div class="grid gad-4 lg:grid-cols-3">
-        <div>
-            <p class="text-lg">Estado Cívil</p>
-            <mat-radio-group class="flex justify-between" formControlName="maritalStatus">
+    <div class="p-4 grid lg:grid-cols-3">
+        <div class="w-full">
+            <div class="text-lg">Estado Cívil</div>
+            <mat-radio-group class="w-full flex flex-col justify-between sm:flex-row" formControlName="maritalStatus">
                 <mat-radio-button [value]="1">Solteiro</mat-radio-button>
                 <mat-radio-button [value]="2">Casado</mat-radio-button>
                 <mat-radio-button [value]="3">Divorciado</mat-radio-button>
@@ -57,7 +57,12 @@
         </div>
         
         <mat-form-field>
-            mat-label
+            <mat-label>Renda Mensal:</mat-label>
+            <input
+                matInput
+                formControlName="monthlyIncome"
+                type="text"
+                placeholder="R$5000,00">
         </mat-form-field>
 
         <p>
