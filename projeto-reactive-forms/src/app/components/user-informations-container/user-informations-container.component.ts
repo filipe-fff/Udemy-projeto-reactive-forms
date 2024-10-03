@@ -17,11 +17,9 @@ import { take } from 'rxjs';
 export class UserInformationsContainerComponent extends UserFormController implements OnChanges, OnInit {
   private readonly countriesService = inject(CountriesService);
   private readonly statesService = inject(StatesService);
-  private readonly citiesService = inject(CitiesService);
   
   countriesList: CountriesList = [];
   statesList: StatesList = [];
-  citiesList: string[] = [];
 
   @Input({ required: true }) userSelected: IUser = {} as IUser;
   @Input({ required: true }) tabSelectedIndex!: number;
@@ -33,34 +31,23 @@ export class UserInformationsContainerComponent extends UserFormController imple
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      const USER_SELECTED = changes["userSelected"];
+      const USER_SELECTED = changes["userForm"] && Object.keys(changes["userForm"].currentValue).length > 0;
 
       if (USER_SELECTED) {
         this.tabSelectedIndex = 0;
         this.userSelectedControl = this.userSelected;
-
+        
         this.getGeneralInformations(this.userSelected);
-
-        this.getStates("Brazil");
-
-        this.getCities("Brazil", "Rio Grande do Sul");
       }
   }
 
   getCountries() {
     this.countriesService.getCountries().pipe(take(1)).subscribe((countriesResponse) => {
       this.countriesList = countriesResponse;
-      console.log(this.countriesList);
     });
   }
 
   getStates(country: string) {
     this.statesService.getStates(country).pipe(take(1)).subscribe((statesResponse) => this.statesList = statesResponse);
-  }
-
-  getCities(country: string, state: string) {
-    this.citiesService.getCities(country, state).pipe(take(1)).subscribe((citiesResponse) => this.citiesList = citiesResponse);
-
-    console.log(this.citiesList);
   }
 }

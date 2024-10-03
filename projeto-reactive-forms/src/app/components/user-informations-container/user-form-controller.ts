@@ -39,7 +39,7 @@ export class UserFormController {
         this.generalInformations.patchValue({
             ...user,
             birthDate: new Date(),
-        }); 
+        });
     }
 
     get generalInformations(): FormGroup {

@@ -4,6 +4,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatAutocompleteModule,
+    MatRadioModule,
   ],
   exports: [
     MatCardModule,
@@ -20,6 +23,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatAutocompleteModule,
+    MatRadioModule,
   ]
 })
 export class AngularMaterialModule { }

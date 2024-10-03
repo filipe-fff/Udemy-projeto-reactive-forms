@@ -1,4 +1,4 @@
-<form [formGroup]="generalInformations" class="p-8">
+<form [formGroup]="generalInformations" class="p-8 grid gap-12">
     <div class="grid gap-4 lg:grid-cols-3">
         <mat-form-field>
             <mat-label>Nome:</mat-label>
@@ -20,29 +20,46 @@
         </mat-form-field>
     </div>
     <div class="grid gap-4 lg:grid-cols-3">
-        <p>
-            <!-- <mat-form-field>
-                <mat-label>País:</mat-label>
-                <input
-                    formControlName="country"
-                    matInput
-                    type="text">
-                <mat-autocomplete #country="matAutocomplete">
-                    <mat-option [value]=""></mat-option>
-                </mat-autocomplete>
-            </mat-form-field> -->
-        </p>
-        <p>
-            Estado
-        </p>
+        <mat-form-field>
+            <mat-label>País:</mat-label>
+            <input
+                formControlName="country"
+                matInput
+                type="text"
+                [matAutocomplete]="country"
+                placeholder="Brazil">
+            <mat-autocomplete #country="matAutocomplete">
+                <mat-option [value]="'1'">a</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input
+            formControlName="state"
+            matInput
+            type="text"
+            placeholder="São Paulo"
+            [autocomplete]="state"
+            >
+            <mat-autocomplete #state="matAutocomplete">
+                <mat-option value="7">ttt</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
     </div>
     <div class="grid gad-4 lg:grid-cols-3">
-        <p>
-            Estado Civíl
-        </p>
-        <p>
-            Renda Mensal
-        </p>
+        <div>
+            <p class="text-lg">Estado Cívil</p>
+            <mat-radio-group class="flex justify-between" formControlName="maritalStatus">
+                <mat-radio-button [value]="1">Solteiro</mat-radio-button>
+                <mat-radio-button [value]="2">Casado</mat-radio-button>
+                <mat-radio-button [value]="3">Divorciado</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        
+        <mat-form-field>
+            mat-label
+        </mat-form-field>
+
         <p>
             Data de Nascimento
         </p>

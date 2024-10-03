@@ -5,6 +5,8 @@
             [userSelected]="userSelected"></app-general-informations>
         <app-general-informations-edit
             *ngIf="isEditModel"
+            [countriesList]="countriesList"
+            [statesList]="statesList"
             [userForm]="userForm"></app-general-informations-edit>
     </mat-tab>
     <mat-tab label="Contato">
