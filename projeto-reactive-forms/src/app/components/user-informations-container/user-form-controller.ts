@@ -1,7 +1,6 @@
-import { inject, Injectable, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { inject, Injectable } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { IUser } from "../../interfaces/users/user.interface";
-import { PhoneList } from "../../types/phone-list";
 
 @Injectable({
     providedIn: "root",
@@ -22,8 +21,8 @@ export class UserFormController {
             generalInformations: this._fb.group({
                 name: ["", Validators.required],
                 email: ["", [Validators.required, Validators.pattern(this.emailPattern)]],
-                country: [""],
-                state: [""],
+                country: ["", Validators.required],
+                state: ["", Validators.required],
                 maritalStatus: [null],
                 monthlyIncome: [null, Validators.required],
                 birthDate: [Date],
@@ -45,5 +44,13 @@ export class UserFormController {
 
     get generalInformations(): FormGroup {
         return this.userForm.get("generalInformations") as FormGroup;
+    }
+
+    get countryForm(): FormControl {
+        return this.generalInformations.get("country") as FormControl;
+    }
+
+    get stateForm(): FormControl {
+        return this.generalInformations.get("state") as FormControl;
     }
 }
