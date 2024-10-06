@@ -57,10 +57,11 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
     if (!searchTerm) return;
 
     this.statesListFiltered = this.statesList.filter(
-      (state: IState) => state.name.toLowerCase().includes(searchTerm.toLowerCase().trim())
+      (state: IState) => {
+            console.log(state.name.toLowerCase() === searchTerm.toLowerCase().trim());
+            return state.name.toLowerCase().includes(searchTerm.toLowerCase().trim())
+        }
     );
-    console.log("statesList =>", this.statesList);
-    console.log("statesListFiltered =>", this.statesListFiltered);
   }
 
   get generalInformationsGroup(): FormGroup {
