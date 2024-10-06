@@ -3,7 +3,7 @@ import { IUser } from '../../interfaces/users/user.interface';
 import { UserFormController } from './user-form-controller';
 import { CountriesService } from '../../services/countries.service';
 import { StatesService } from '../../services/states.service';
-import { CitiesService } from '../../services/cities.service';
+
 import { CountriesList } from '../../types/countries-list';
 import { StatesList } from '../../types/states-list';
 import { take } from 'rxjs';
@@ -27,27 +27,33 @@ export class UserInformationsContainerComponent extends UserFormController imple
   @Input({ required: true }) isEditModel: boolean = false;
 
   ngOnInit(): void {
-      this.getCountries();
+      this.getCountriesList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      const USER_SELECTED = changes["userForm"] && Object.keys(changes["userForm"].currentValue).length > 0;
+      this.tabSelectedIndex = 0;
+      const HAS_USER_SELECTED = changes["userSelected"] && Object.keys(changes["userSelected"].currentValue).length > 0;
 
-      if (USER_SELECTED) {
-        this.tabSelectedIndex = 0;
-        this.userSelectedControl = this.userSelected;
-        
-        this.getGeneralInformations(this.userSelected);
+      if (HAS_USER_SELECTED) {
+        this.fullfillUserForm(this.userSelected);
+
+        this.getCountriesList();
+
+        this.getStatesList(this.userSelected.country);
       }
   }
 
-  getCountries() {
+  onCountrySelected(country: string) {
+    this.getStatesList(country);
+  }
+
+  private getCountriesList() {
     this.countriesService.getCountries().pipe(take(1)).subscribe((countriesResponse) => {
       this.countriesList = countriesResponse;
     });
   }
 
-  getStates(country: string) {
+  private getStatesList(country: string) {
     this.statesService.getStates(country).pipe(take(1)).subscribe((statesResponse) => this.statesList = statesResponse);
   }
 }

@@ -1,12 +1,16 @@
 import { inject, Injectable } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { IUser } from "../../interfaces/users/user.interface";
+import { preparePhoneList } from "../../utils/prepare-phone-list";
+import { PhoneList } from "../../types/phone-list";
+import { PhoneTypeDescriptionMap } from "../../utils/phone-type-description-map";
+import { IPhoneToDisplay } from "../../interfaces/users/phone-to-display.interface";
+import { convertStringToDate } from "../../utils/converStringToDate";
 
 @Injectable({
     providedIn: "root",
 })
 export class UserFormController {
-    userSelectedControl: IUser = {} as IUser;
     userForm: FormGroup = {} as FormGroup;
     emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -27,7 +31,7 @@ export class UserFormController {
                 monthlyIncome: [null, Validators.required],
                 birthDate: [Date],
             }),
-            contactsInformations: this._fb.group({
+            contactInformations: this._fb.group({
                 phoneList: this._fb.array([]),
                 addressList: this._fb.array([]),
             }),
@@ -35,15 +39,59 @@ export class UserFormController {
         });
     }
 
-    getGeneralInformations(user: IUser) {
+    fullfillUserForm(user: IUser) {
+        this.fullfillResetUserForm();
+
+        this.fullfillGeneralInformations(user);
+        this.fulfillContactsInformations(user.phoneList);
+    }
+
+    private fullfillResetUserForm() {
+        this.userForm.reset();
+        this.contactsInformations.reset();
+        this.phoneList.clear();
+        this.phoneList.reset();
+        this.addressList.clear();
+        this.addressList.reset();
+    }
+
+    private fullfillGeneralInformations(userResponse: IUser) {
         this.generalInformations.patchValue({
-            ...user,
-            birthDate: new Date(),
+            ...userResponse,
+            birthDate: convertStringToDate(userResponse.birthDate),
+        });
+    }
+
+    private fulfillContactsInformations(phoneListResponse: PhoneList) {
+        preparePhoneList(phoneListResponse, false, (phone) => {
+            this.phoneList.push(this.addPhone(phone));
+        });
+    }
+
+    private addPhone(phone: IPhoneToDisplay): FormGroup {
+        const validator = phone.typeDescription === PhoneTypeDescriptionMap[3]? [] : [Validators.required];
+
+        return this._fb.group({
+            type: [phone.type],
+            typeDescription: [phone.typeDescription],
+            number: [phone.phoneNumber, validator],
         });
     }
 
     get generalInformations(): FormGroup {
         return this.userForm.get("generalInformations") as FormGroup;
+    }
+
+    get contactsInformations(): FormGroup {
+        return this.userForm.get("contactInformations") as FormGroup;
+    }
+
+    get phoneList(): FormArray {
+        return this.contactsInformations.get("phoneList") as FormArray;
+    }
+
+    get addressList(): FormArray {
+        return this.contactsInformations.get("addressList") as FormArray;
     }
 
     get countryForm(): FormControl {

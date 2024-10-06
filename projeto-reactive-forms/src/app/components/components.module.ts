@@ -19,6 +19,7 @@ import { DependentsListEditComponent } from './dependents-list-edit/dependents-l
 import { AddressListEditComponent } from './contact-informations-edit/components/address-list-edit/address-list-edit.component';
 import { PhoneListEditComponent } from './contact-informations-edit/components/phone-list-edit/phone-list-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 registerLocaleData(localePT, "pt-BR");
 
@@ -45,6 +46,7 @@ registerLocaleData(localePT, "pt-BR");
     AngularMaterialModule,
     PipesModule,
     ReactiveFormsModule,
+    NgxMaskDirective,
   ],
   exports: [
     PipesModule,
@@ -60,7 +62,8 @@ registerLocaleData(localePT, "pt-BR");
     {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: "BRL",
-    }
+    },
+    provideNgxMask(),
   ]
 })
 export class ComponentsModule { }

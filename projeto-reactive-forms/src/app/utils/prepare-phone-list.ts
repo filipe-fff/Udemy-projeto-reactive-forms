@@ -5,15 +5,18 @@ import { PhoneList } from "../types/phone-list";
 import { PhoneTypeDescriptionMap } from "./phone-type-description-map";
 
 
-export const preparePhoneList = (phoneList: PhoneList, isDisplayPhone: boolean, calback:(phone: IPhoneToDisplay) => void) => {
+export const preparePhoneList = (phoneList: PhoneList, isToDisplay: boolean, calback:(phone: IPhoneToDisplay) => void) => {
     
     Object.keys(PhoneTypeDescriptionMap).map(Number).forEach((phoneType: number) => {
         
-        const phoneFound = phoneList.find((phone: IPhone) => phone.type === phoneType);
+        const phoneFound = phoneList.find((phone) => phone.type === phoneType);
 
-        let phoneNumber: string = "";
-        
-        phoneNumber = phoneFound? converPhoneToDisplay(phoneFound) : "-";
+        let phoneNumber = "";
+
+        if (isToDisplay)
+            phoneNumber = phoneFound? convertPhoneToDisplay(phoneFound) : "-";
+        else
+            phoneNumber = phoneFound? convertPhoneToEdit(phoneFound): "";
 
         calback({
             type: phoneType,
@@ -23,7 +26,12 @@ export const preparePhoneList = (phoneList: PhoneList, isDisplayPhone: boolean, 
     });
 }
 
-const converPhoneToDisplay = (phone: IPhone): string => {
+const convertPhoneToDisplay = (phone: IPhone): string => {
 
     return `${phone.internationalCode} ${phone.areaCode} ${phone.number}`;
+}
+
+const convertPhoneToEdit = (phone: IPhone): string => {
+
+    return `${phone.internationalCode}${phone.areaCode}${phone.number}`.replace("+", "").replace("-", "");
 }

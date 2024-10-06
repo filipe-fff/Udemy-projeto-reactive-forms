@@ -27,10 +27,12 @@ export class AppComponent implements OnInit {
 
   onUserSelected(userIndex: number) {
 
-    this.userSelectedIndex = userIndex;
-    if(!this.usersList[userIndex]) return;
+    const userFound = this.usersList[userIndex];
 
-    this.userSelected = structuredClone(this.usersList[userIndex]);
+    if(userFound) {
+      this.userSelectedIndex = userIndex;
+      this.userSelected = structuredClone(this.usersList[userIndex]);
+    }
   }
 
   onEditButton() {
