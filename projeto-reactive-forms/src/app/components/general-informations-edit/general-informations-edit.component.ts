@@ -25,7 +25,7 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.watchCountryFormChangesAndFilter();
 
-    this.watchStatesFormChangesAndFilter();
+    this.watchStateFormChangesAndFilter();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -49,7 +49,7 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
     );
   }
 
-  private watchStatesFormChangesAndFilter() {
+  private watchStateFormChangesAndFilter() {
     this.stateControl.valueChanges.subscribe(this.filterStatesList.bind(this));
   }
 

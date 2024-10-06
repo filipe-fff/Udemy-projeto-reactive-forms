@@ -15,11 +15,11 @@ import { take } from 'rxjs';
   styleUrl: './user-informations-container.component.scss'
 })
 export class UserInformationsContainerComponent extends UserFormController implements OnChanges, OnInit {
-  private readonly countriesService = inject(CountriesService);
-  private readonly statesService = inject(StatesService);
-  
   countriesList: CountriesList = [];
   statesList: StatesList = [];
+
+  private readonly countriesService = inject(CountriesService);
+  private readonly statesService = inject(StatesService);
 
   @Input({ required: true }) userSelected: IUser = {} as IUser;
   @Input({ required: true }) tabSelectedIndex!: number;
@@ -37,8 +37,6 @@ export class UserInformationsContainerComponent extends UserFormController imple
       if (HAS_USER_SELECTED) {
         this.fullfillUserForm(this.userSelected);
 
-        this.getCountriesList();
-
         this.getStatesList(this.userSelected.country);
       }
   }
@@ -48,12 +46,12 @@ export class UserInformationsContainerComponent extends UserFormController imple
   }
 
   private getCountriesList() {
-    this.countriesService.getCountries().pipe(take(1)).subscribe((countriesResponse) => {
-      this.countriesList = countriesResponse;
+    this.countriesService.getCountries().pipe(take(1)).subscribe((countriesList: CountriesList) => {
+      this.countriesList = countriesList;
     });
   }
 
   private getStatesList(country: string) {
-    this.statesService.getStates(country).pipe(take(1)).subscribe((statesResponse) => this.statesList = statesResponse);
+    this.statesService.getStates(country).pipe(take(1)).subscribe((statesList) => this.statesList = statesList);
   }
 }
