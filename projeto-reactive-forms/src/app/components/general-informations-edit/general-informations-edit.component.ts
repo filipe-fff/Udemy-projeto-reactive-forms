@@ -5,6 +5,10 @@ import { StatesList } from '../../types/states-list';
 import { ICountry } from '../../interfaces/countries/country.interface';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { IState } from '../../interfaces/states/state.interface';
+import { MaritalStatusEnum } from '../../enums/marital-status.enum';
+import { MaritalStatusDescriptionMap } from '../../utils/marital-status-description-map';
+import { prepareMaritalStatusList } from '../../utils/prepare-marital-status-list';
+import { MaritalStatusItemList } from '../../types/marital-status-item-list';
 
 
 @Component({
@@ -15,6 +19,7 @@ import { IState } from '../../interfaces/states/state.interface';
 export class GeneralInformationsEditComponent implements OnInit, OnChanges {
   countriesListFiltered: CountriesList = [];
   statesListFiltered: StatesList = [];
+  maritalStatusList: MaritalStatusItemList = [];
 
   @Input({ required: true }) countriesList: CountriesList = [];
   @Input({ required: true }) statesList: StatesList = []
@@ -26,6 +31,8 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
     this.watchCountryFormChangesAndFilter();
 
     this.watchStateFormChangesAndFilter();
+
+    this.onMaritalStatusList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,6 +43,17 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
   onCountrySelected(country: MatAutocompleteSelectedEvent) {
     this.onUserSelectedEmmit.emit(country.option.value);
   }
+
+  onMaritalStatusList() {
+    this.maritalStatusList = [];
+    prepareMaritalStatusList((maritalStatus) => {
+      this.maritalStatusList.push({
+        type: maritalStatus.type,
+        typeDescription: maritalStatus.typeDescription,
+      })
+    })
+  }
+  
 
   private watchCountryFormChangesAndFilter() {
     this.countryControl.valueChanges.subscribe(this.filterCountriesList.bind(this));

@@ -1,10 +1,14 @@
 .user-selected,
 .user-card-hover:hover {
     background-color: #9ca3af !important;
+}
+
+.user-card-hover:hover {
     cursor: pointer !important;
 }
 
 .user-card-disabled {
     background-color: #d6deeb !important;
+    display:;
     cursor: not-allowed !important;
 }

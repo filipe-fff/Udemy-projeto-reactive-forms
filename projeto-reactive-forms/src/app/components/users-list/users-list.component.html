@@ -1,10 +1,11 @@
 <div class="grid gap-4 sm:grid-cols-3">
     <mat-card
-        class="user-card-hover"
         *ngFor="let user of usersList; let i = index"
         [ngClass]="{
             'user-card-disabled': isEditModel && userSelectedIndex !== i,
+            'user-card-hover': !isEditModel,
             'user-selected': userSelectedIndex === i,
+            'disabled': isEditModel,
         }"
         (click)="onUserSelected(i)">
         <mat-card-header>
