@@ -31,7 +31,7 @@ export class UserInformationsContainerComponent extends UserFormController imple
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      this.tabSelectedIndex = 0;
+      this.tabSelectedIndex = 1;
       const HAS_USER_SELECTED = changes["userSelected"] && Object.keys(changes["userSelected"].currentValue).length > 0;
 
       if (HAS_USER_SELECTED) {

@@ -11,6 +11,7 @@
                     formControlName="number"
                     matInput
                     [mask]="phone.value.type | phoneMask"
+                    [placeholder]="phone.value.type | phonePlaceholder"
                     [value]="phone"
                     type="text">
                     <mat-error *ngIf="phone.get('number')?.hasError('required')">
