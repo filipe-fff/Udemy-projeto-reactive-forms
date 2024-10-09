@@ -1,13 +1,61 @@
 <p class="text-2xl font-semibold">Endereço:</p>
-<ng-container>
-    <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
-        <p>Típo</p>
-        <p>Rua</p>
-        <p>Complemento</p>
-        <p>País</p>
-        <p>Estado</p>
-        <p>Cidade</p>
-    </div>
-
-    <hr class="lg:hidden">
-</ng-container>
+<form
+    [formGroup]="userForm"
+    class="p-4 gap-4 grid">
+    <ng-container formGroupName="contactInformations">
+        <ng-container
+            formArrayName="addressList"
+            *ngFor="let address of addressList.controls; let i = index">
+            <div
+                [formGroupName]="i"
+                class="py-4 gap-4 grid sm:grid-cols-2 lg:grid-cols-6">
+                <mat-form-field
+                    class="gap-4 w-full">
+                    <mat-label>Típo</mat-label>
+                    <input formControlName="typeDescription" matInput type="text">
+                </mat-form-field>
+                <mat-form-field
+                    class="gap-4 w-full">
+                    <mat-label>Rua</mat-label>
+                    <input formControlName="street" matInput type="text">
+                    <mat-error>
+                        A rua é obrigatória.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field
+                    class="gap-4 w-full">
+                    <mat-label>Complemento</mat-label>
+                    <input formControlName="complement" matInput type="text">
+                    <mat-error>
+                        O complemento é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field
+                    class="gap-4 w-full">
+                    <mat-label>País</mat-label>
+                    <input formControlName="country" matInput type="text">
+                    <mat-error>
+                        O país é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field
+                    class="gap-4 w-full">
+                    <mat-label>Estado</mat-label>
+                    <input formControlName="state" matInput type="text">
+                    <mat-error>
+                        O estado é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field
+                    class="gap-4 w-full">
+                    <mat-label>Cidade</mat-label>
+                    <input formControlName="city" matInput type="text">
+                    <mat-error>
+                        A cidade é obrigatória.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <hr class="lg:hidden">
+        </ng-container>
+    </ng-container>
+</form>

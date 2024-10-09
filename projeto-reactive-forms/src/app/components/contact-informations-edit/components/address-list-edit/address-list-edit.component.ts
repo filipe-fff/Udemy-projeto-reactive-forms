@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-address-list-edit',
@@ -8,4 +8,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class AddressListEditComponent {
   @Input({ required: true }) userForm: FormGroup = {} as FormGroup;
+
+  get addressList(): FormArray {
+    return this.userForm.get("contactInformations.addressList") as FormArray;
+  }
 }

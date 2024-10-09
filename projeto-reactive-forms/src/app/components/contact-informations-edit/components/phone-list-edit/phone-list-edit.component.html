@@ -6,7 +6,7 @@
                 class="w-full"
                 *ngFor="let phone of phoneList.controls; let i = index"
                 [formGroupName]="i">
-                <mat-label>{{ phoneList.value[i].typeDescription }}</mat-label>
+                <mat-label>{{ phone.value.typeDescription }}</mat-label>
                 <input
                     formControlName="number"
                     matInput

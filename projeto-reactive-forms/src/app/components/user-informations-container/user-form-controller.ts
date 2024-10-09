@@ -6,6 +6,12 @@ import { PhoneList } from "../../types/phone-list";
 import { PhoneTypeDescriptionMap } from "../../utils/phone-type-description-map";
 import { IPhoneToDisplay } from "../../interfaces/users/phone-to-display.interface";
 import { convertStringToDate } from "../../utils/converStringToDate";
+import { prepareAddressList } from "../../utils/prepare-address-list";
+import { AddressList } from "../../types/address-list";
+import { IAddress } from "../../interfaces/users/address.interface";
+import { IAddreesToDisplay } from "../../interfaces/users/address-to-display.interface";
+import { error } from "console";
+import { requiredAddressValidator } from "../../utils/validators/required-address-validator";
 
 @Injectable({
     providedIn: "root",
@@ -43,7 +49,10 @@ export class UserFormController {
         this.fullfillResetUserForm();
 
         this.fullfillGeneralInformations(user);
-        this.fulfillContactsInformations(user.phoneList);
+        this.fulfillPhoneList(user.phoneList);
+        this.fulfillAddressList(user.addressList);
+
+        console.log(this.userForm.value);
     }
 
     private fullfillResetUserForm() {
@@ -62,7 +71,7 @@ export class UserFormController {
         });
     }
 
-    private fulfillContactsInformations(phoneListResponse: PhoneList) {
+    private fulfillPhoneList(phoneListResponse: PhoneList) {
         preparePhoneList(phoneListResponse, false, (phone) => {
             this.phoneList.push(this.addPhone(phone));
         });
@@ -76,6 +85,24 @@ export class UserFormController {
             typeDescription: [phone.typeDescription],
             number: [phone.phoneNumber, validator],
         });
+    }
+
+    private fulfillAddressList(addressResponse: AddressList) {
+        prepareAddressList(addressResponse, false, (address) => {
+            this.addressList.push(this.addAddress(address));
+        });
+    }
+
+    private addAddress(address: IAddreesToDisplay): FormGroup {
+        return this._fb.group({
+            type: [address.type],
+            typeDescription: [{ value: address.typeDescription, disabled: true}],
+            street: [address.street],
+            complement: [address.complement],
+            country: [address.country],
+            state: [address.state],
+            city: [address.city],
+        }, {validators: requiredAddressValidator})
     }
 
     get generalInformations(): FormGroup {

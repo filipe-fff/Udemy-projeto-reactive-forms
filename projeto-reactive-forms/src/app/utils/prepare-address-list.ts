@@ -12,7 +12,11 @@ export const prepareAddressList = (addressList: AddressList, isDisplayAddress: b
     
         let address: IAddreesToDisplay = {} as IAddreesToDisplay;
 
-        address = convertAddressToDisplay(addressFound, addressType);
+        if (isDisplayAddress)
+            address = convertAddressToDisplay(addressFound, addressType);
+
+        else
+            address = convertAddressToEdit(addressFound, addressType);
 
         callback({
             ...address,
@@ -42,5 +46,30 @@ const convertAddressToDisplay = (addressFound: IAddress | undefined, addressType
         country: "-",
         state: "-",
         city: "-",
+    }
+}
+
+const convertAddressToEdit = (addressFound: IAddress | undefined, addressType: number): IAddreesToDisplay => {
+
+    if (addressFound) {
+        return {
+            type: addressType,
+            typeDescription: AddressTypeDescriptionMap[addressType as AddressTypeEnum],
+            street: addressFound.street,
+            complement: addressFound.complement,
+            country: addressFound.country,
+            state: addressFound.state,
+            city: addressFound.city,
+        }
+    }
+    
+    return {
+        type: addressType,
+        typeDescription: AddressTypeDescriptionMap[addressType as AddressTypeEnum],
+        street: "",
+        complement: "",
+        country: "",
+        state: "",
+        city: "",
     }
 }

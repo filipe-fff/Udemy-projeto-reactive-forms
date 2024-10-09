@@ -56,7 +56,7 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
   
 
   private watchCountryFormChangesAndFilter() {
-    this.countryControl.valueChanges.subscribe(this.filterCountriesList.bind(this));
+    this.country.valueChanges.subscribe(this.filterCountriesList.bind(this));
   }
 
   private filterCountriesList(searchTerm: string) {
@@ -68,7 +68,7 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
   }
 
   private watchStateFormChangesAndFilter() {
-    this.stateControl.valueChanges.subscribe(this.filterStatesList.bind(this));
+    this.state.valueChanges.subscribe(this.filterStatesList.bind(this));
   }
 
   private filterStatesList(searchTerm: string) {
@@ -76,25 +76,24 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
 
     this.statesListFiltered = this.statesList.filter(
       (state: IState) => {
-            console.log(state.name.toLowerCase() === searchTerm.toLowerCase().trim());
             return state.name.toLowerCase().includes(searchTerm.toLowerCase().trim())
         }
     );
   }
 
-  get generalInformationsGroup(): FormGroup {
+  get generalInformations(): FormGroup {
     return this.userForm.get("generalInformations") as FormGroup;
   }
 
-  get emailControls(): FormControl {
-    return this.generalInformationsGroup.get("email") as FormControl;
+  get email(): FormControl {
+    return this.generalInformations.get("email") as FormControl;
   }
 
-  get countryControl(): FormControl {
-    return this.generalInformationsGroup.get("country") as FormControl;
+  get country(): FormControl {
+    return this.generalInformations.get("country") as FormControl;
   }
 
-  get stateControl(): FormControl {
-    return this.generalInformationsGroup.get("state") as FormControl;
+  get state(): FormControl {
+    return this.generalInformations.get("state") as FormControl;
   }
 }
