@@ -12,6 +12,8 @@ import { IAddress } from "../../interfaces/users/address.interface";
 import { IAddreesToDisplay } from "../../interfaces/users/address-to-display.interface";
 import { error } from "console";
 import { requiredAddressValidator } from "../../utils/validators/required-address-validator";
+import { DependentsList } from "../../types/dependents-list";
+import { IDependent } from "../../interfaces/users/dependent.interface";
 
 @Injectable({
     providedIn: "root",
@@ -51,6 +53,7 @@ export class UserFormController {
         this.fullfillGeneralInformations(user);
         this.fulfillPhoneList(user.phoneList);
         this.fulfillAddressList(user.addressList);
+        this.fulfillDependentList(user.dependentsList);
 
         console.log(this.userForm.value);
     }
@@ -62,6 +65,8 @@ export class UserFormController {
         this.phoneList.reset();
         this.addressList.clear();
         this.addressList.reset();
+        this.depedentsList.clear();
+        this.depedentsList.reset();
     }
 
     private fullfillGeneralInformations(userResponse: IUser) {
@@ -105,6 +110,20 @@ export class UserFormController {
         }, {validators: requiredAddressValidator})
     }
 
+    private fulfillDependentList(dependentsResponse: DependentsList) {
+        dependentsResponse.forEach((dependent: IDependent) => {
+            this.depedentsList.push(this.addDependendent(dependent));
+        });
+    }
+
+    private addDependendent(dependent: IDependent): FormGroup {
+        return this._fb.group({
+            name: [dependent.name, Validators.required],
+            age: [dependent.age, Validators.required],
+            document: [dependent.document, Validators.required],
+        });
+    }
+
     get generalInformations(): FormGroup {
         return this.userForm.get("generalInformations") as FormGroup;
     }
@@ -119,6 +138,10 @@ export class UserFormController {
 
     get addressList(): FormArray {
         return this.contactsInformations.get("addressList") as FormArray;
+    }
+
+    get depedentsList(): FormArray {
+        return this.userForm.get("dependentsList") as FormArray;
     }
 
     get countryForm(): FormControl {

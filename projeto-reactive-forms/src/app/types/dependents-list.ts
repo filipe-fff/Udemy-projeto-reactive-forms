@@ -1,3 +1,3 @@
-import { IDependents } from "../interfaces/users/dependents.interface";
+import { IDependent } from "../interfaces/users/dependent.interface";
 
-export type DependentsList = IDependents[];
+export type DependentsList = IDependent[];

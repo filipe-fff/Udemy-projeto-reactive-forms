@@ -1,9 +1,31 @@
 <p class="p-8 text-2xl font-semibold">Dependentes</p>
-<div class="grid grid-cols-2 sm:grid-cols-4">
-    <p>Nome</p>
-    <p>Idade</p>
-    <p>Documento</p>
-    <div>
-        <button>Remover</button>
-    </div>
-</div>
+<form [formGroup]="userForm" class="p-4 gap-4 grid grid-cols-2 sm:grid-cols-4">
+    <ng-container formArrayName="dependentsList" *ngFor="let dependent of dependentsList.controls; let i = index">
+        <ng-container [formGroupName]="i">
+            <mat-form-field class="w-full">
+                <mat-label>Nome:</mat-label>
+                <input matInput formControlName="name" type="text">
+                <mat-error>
+                    O nome é obrigatório.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+                <mat-label>Idade</mat-label>
+                <input matInput formControlName="age" type="text">
+                <mat-error>
+                    A idade é obrigatória.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+                <mat-label>Documento:</mat-label>
+                 <input matInput formControlName="document" type="text">
+                 <mat-error>
+                    O documento é obrigatório.
+                 </mat-error>
+            </mat-form-field>
+        </ng-container>
+        <div>
+            <button>Remover</button>
+        </div>
+    </ng-container>
+</form>

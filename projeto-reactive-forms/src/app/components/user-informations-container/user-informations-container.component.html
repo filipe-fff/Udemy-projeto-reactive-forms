@@ -23,6 +23,7 @@
             *ngIf="!isEditModel"
             [dependentsList]="userSelected.dependentsList"></app-dependents-list>
         <app-dependents-list-edit
-            *ngIf="isEditModel"></app-dependents-list-edit>
+            *ngIf="isEditModel"
+            [userForm]="userForm"></app-dependents-list-edit>
     </mat-tab>
 </mat-tab-group>
