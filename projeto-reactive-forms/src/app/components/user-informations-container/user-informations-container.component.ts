@@ -26,12 +26,13 @@ export class UserInformationsContainerComponent extends UserFormController imple
 
   @Input({ required: true }) isEditModel: boolean = false;
 
+
   ngOnInit(): void {
       this.getCountriesList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-      this.tabSelectedIndex = 1;
+      this.tabSelectedIndex = 2;
       const HAS_USER_SELECTED = changes["userSelected"] && Object.keys(changes["userSelected"].currentValue).length > 0;
 
       if (HAS_USER_SELECTED) {

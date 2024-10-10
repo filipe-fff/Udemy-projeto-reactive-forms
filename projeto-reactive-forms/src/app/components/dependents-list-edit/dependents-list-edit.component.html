@@ -1,31 +1,44 @@
-<p class="p-8 text-2xl font-semibold">Dependentes</p>
-<form [formGroup]="userForm" class="p-4 gap-4 grid grid-cols-2 sm:grid-cols-4">
-    <ng-container formArrayName="dependentsList" *ngFor="let dependent of dependentsList.controls; let i = index">
-        <ng-container [formGroupName]="i">
-            <mat-form-field class="w-full">
-                <mat-label>Nome:</mat-label>
-                <input matInput formControlName="name" type="text">
-                <mat-error>
-                    O nome é obrigatório.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="w-full">
-                <mat-label>Idade</mat-label>
-                <input matInput formControlName="age" type="text">
-                <mat-error>
-                    A idade é obrigatória.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="w-full">
-                <mat-label>Documento:</mat-label>
-                 <input matInput formControlName="document" type="text">
-                 <mat-error>
-                    O documento é obrigatório.
-                 </mat-error>
-            </mat-form-field>
+<div class="p-4">
+    <p class="text-2xl font-semibold">Dependentes:</p>
+    
+    <button
+        class="rounded-md px-3 py-2 text-lg font-medium leading-5 text-white bg-green-600 hover:bg-green-500"
+        (click)="addDependent()">Adicionar</button>
+    
+    <form [formGroup]="userForm" class="py-8 gap-4 grid grid-cols-2 sm:grid-cols-4">
+        <ng-container formArrayName="dependentsList" *ngFor="let dependent of dependentsList.controls; let i = index">
+            <ng-container [formGroupName]="i">
+                <mat-form-field class="w-full">
+                    <mat-label>Nome:</mat-label>
+                    <input matInput formControlName="name" type="text">
+                    <mat-error>
+                        O nome é obrigatório.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-full">
+                    <mat-label>Idade</mat-label>
+                    <input matInput formControlName="age" type="text">
+                    <mat-error>
+                        A idade é obrigatória.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-full">
+                    <mat-label>Documento:</mat-label>
+                        <input
+                        formControlName="document"
+                        matInput
+                        mask="XXX.000.000-XX"
+                        type="text">
+                     <mat-error>
+                        O documento é obrigatório.
+                     </mat-error>
+                </mat-form-field>
+            </ng-container>
+            <div class="w-full">
+                <button
+                    class="m-auto block my-2 rounded-md px-3 py-1 text-lg font-medium learding-5 text-white bg-red-600 hover:bg-red-500"
+                    (click)="removeDependent(i)">Remover</button>
+            </div>
         </ng-container>
-        <div>
-            <button>Remover</button>
-        </div>
-    </ng-container>
-</form>
+    </form>
+</div>

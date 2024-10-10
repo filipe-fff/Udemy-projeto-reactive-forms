@@ -7,6 +7,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatAutocompleteModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatIconModule,
   ],
   exports: [
     MatCardModule,
@@ -29,6 +31,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatAutocompleteModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatIconModule,
   ],
   providers: [
     provideNativeDateAdapter(),

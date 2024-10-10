@@ -58,6 +58,14 @@ export class UserFormController {
         console.log(this.userForm.value);
     }
 
+    onAddDependent() {
+        this.depedentsList.push(this.addDependendent());
+    }
+
+    onRemoveDependent(dependentIndex: number) {
+        this.depedentsList.removeAt(dependentIndex);
+    }
+
     private fullfillResetUserForm() {
         this.userForm.reset();
         this.contactsInformations.reset();
@@ -112,15 +120,19 @@ export class UserFormController {
 
     private fulfillDependentList(dependentsResponse: DependentsList) {
         dependentsResponse.forEach((dependent: IDependent) => {
-            this.depedentsList.push(this.addDependendent(dependent));
+            this.depedentsList.push(this._fb.group({
+                name: [dependent.name, Validators.required],
+                age: [dependent.age, Validators.required],
+                document: [dependent.document, Validators.required],
+            }));
         });
     }
 
-    private addDependendent(dependent: IDependent): FormGroup {
+    private addDependendent(): FormGroup {
         return this._fb.group({
-            name: [dependent.name, Validators.required],
-            age: [dependent.age, Validators.required],
-            document: [dependent.document, Validators.required],
+            name: ["", Validators.required],
+            age: [null, Validators.required],
+            document: [null, Validators.required],
         });
     }
 

@@ -1,5 +1,10 @@
 <mat-tab-group *ngIf="userSelected !== undefined" class="m-4" [(selectedIndex)]="tabSelectedIndex">
-    <mat-tab label="Geral">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            Geral
+            <mat-icon *ngIf="userForm.get('generalInformations')?.invalid" class="mb-2 text-xs text-red-600">circle</mat-icon>
+        </ng-template>
+
         <app-general-informations
             *ngIf="!isEditModel"
             [userSelected]="userSelected"></app-general-informations>
@@ -10,7 +15,12 @@
             [userForm]="userForm"
             (onCountrySelected)="onCountrySelected($event)"></app-general-informations-edit>
     </mat-tab>
-    <mat-tab label="Contato">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            Contato
+            <mat-icon *ngIf="userForm.get('contactInformations')?.invalid" class="mb-2 text-xs text-red-600">circle</mat-icon>
+        </ng-template>
+
         <app-contact-informations
             *ngIf="!isEditModel"
             [userSelected]="userSelected"></app-contact-informations>
@@ -18,12 +28,19 @@
             *ngIf="isEditModel"
             [userForm]="userForm"></app-contact-informations-edit>
     </mat-tab>
-    <mat-tab label="Dependente">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            Dependente
+            <mat-icon class="mb-2 text-xs text-red-600">circle</mat-icon>
+        </ng-template>
+        
         <app-dependents-list
             *ngIf="!isEditModel"
             [dependentsList]="userSelected.dependentsList"></app-dependents-list>
         <app-dependents-list-edit
             *ngIf="isEditModel"
-            [userForm]="userForm"></app-dependents-list-edit>
+            [userForm]="userForm"
+            (onAddDependent)="onAddDependent()"
+            (onRemoveDependent)="onRemoveDependent($event)"></app-dependents-list-edit>
     </mat-tab>
 </mat-tab-group>

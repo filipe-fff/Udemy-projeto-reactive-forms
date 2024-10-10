@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   userSelected: IUser = {} as IUser;
   userSelectedIndex: number | undefined;
 
-  isEditModel: boolean = true;
+  isEditModel: boolean = false;
 
   tabSelectedIndex: number = 0;
 
