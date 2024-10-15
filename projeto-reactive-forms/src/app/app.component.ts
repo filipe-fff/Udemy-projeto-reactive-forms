@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { UsersService } from './services/users.service';
 import { UsersList } from './types/users-list';
@@ -13,11 +13,12 @@ export class AppComponent implements OnInit {
   usersList: UsersList = [];
   userSelected: IUser = {} as IUser;
   userSelectedIndex: number | undefined;
+  tabSelectedIndex: number = 0;
 
   isEditModel: boolean = false;
   enabledButtonSave!: boolean;
+  userFormUpdate = false;
 
-  tabSelectedIndex: number = 0;
 
   private readonly _usersService = inject(UsersService);
 
@@ -38,16 +39,24 @@ export class AppComponent implements OnInit {
 
   onEditButton() {
     this.isEditModel = true;
+    this.userFormUpdate = false;
   }
 
   onCancelButton() {
-    this.userSelected = structuredClone(this.userSelected);
     this.isEditModel = false;
+    this.userFormUpdate = false;
+    this.userSelected = structuredClone(this.userSelected);
   }
 
-  onSaveButton() {}
+  onSaveButton() {
+    this.userFormUpdate = false;
+  }
 
   onEnabledButtonSave(enabledButtonSave: boolean) {
     setTimeout(() => this.enabledButtonSave = enabledButtonSave, 0);
+  }
+
+  onUserFormFirstValueChanges() {
+    this.userFormUpdate = true;
   }
 }

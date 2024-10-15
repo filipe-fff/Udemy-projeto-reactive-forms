@@ -6,7 +6,7 @@ import { StatesService } from '../../services/states.service';
 
 import { CountriesList } from '../../types/countries-list';
 import { StatesList } from '../../types/states-list';
-import { distinctUntilChanged, take } from 'rxjs';
+import { distinctUntilChanged, Subscription, take } from 'rxjs';
 
 
 @Component({
@@ -19,25 +19,30 @@ export class UserInformationsContainerComponent extends UserFormController imple
   @Input({ required: true }) tabSelectedIndex!: number;
   @Input({ required: true }) isEditModel!: boolean;
   @Output("onEnabledButtonSave") onEnabledButtonSaveEmitt = new EventEmitter<boolean>();
+  @Output("onUserFormFirstValueChanges") onUserFormValueChangesEmitt = new EventEmitter<void>() ;
   
   private readonly countriesService = inject(CountriesService);
   private readonly statesService = inject(StatesService);
   
   countriesList: CountriesList = [];
   statesList: StatesList = [];
+  userFormValueChangesSubs!: Subscription;
 
 
   ngOnInit(): void {
       this.getCountriesList();
       this.onUserStatusChanged();
+      this.onUserFormFirstValueChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
       this.tabSelectedIndex = 0;
       const HAS_USER_SELECTED = changes["userSelected"] && Object.keys(changes["userSelected"].currentValue).length > 0;
 
-
       if (HAS_USER_SELECTED) {
+        if(this.userFormValueChangesSubs) {
+          this.userFormValueChangesSubs.unsubscribe()
+        };
         this.fullfillUserForm(this.userSelected);
         this.getStatesList(this.userSelected.country);
       }
@@ -60,6 +65,12 @@ export class UserInformationsContainerComponent extends UserFormController imple
   private onUserStatusChanged() {
     this.userForm.statusChanges.pipe(distinctUntilChanged()).subscribe(() => {
       this.onEnabledButtonSaveEmitt.emit(this.userForm.valid);
+    });
+  }
+
+  private onUserFormFirstValueChanges() {
+    this.userFormValueChangesSubs = this.userForm.valueChanges.pipe(take(1)).subscribe(() => {
+      this.onUserFormValueChangesEmitt.emit();
     });
   }
 }
