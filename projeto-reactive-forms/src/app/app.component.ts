@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   onCancelButton() {
+    this.userSelected = structuredClone(this.userSelected);
     this.isEditModel = false;
   }
 
