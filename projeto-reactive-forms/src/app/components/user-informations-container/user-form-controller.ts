@@ -54,8 +54,6 @@ export class UserFormController {
         this.fulfillPhoneList(user.phoneList);
         this.fulfillAddressList(user.addressList);
         this.fulfillDependentList(user.dependentsList);
-
-        console.log(this.userForm.value);
     }
 
     onAddDependent() {

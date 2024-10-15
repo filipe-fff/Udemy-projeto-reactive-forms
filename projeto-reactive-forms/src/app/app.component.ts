@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   userSelectedIndex: number | undefined;
 
   isEditModel: boolean = false;
+  enabledButtonSave!: boolean;
 
   tabSelectedIndex: number = 0;
 
@@ -44,4 +45,8 @@ export class AppComponent implements OnInit {
   }
 
   onSaveButton() {}
+
+  onEnabledButtonSave(enabledButtonSave: boolean) {
+    setTimeout(() => this.enabledButtonSave = enabledButtonSave, 0);
+  }
 }

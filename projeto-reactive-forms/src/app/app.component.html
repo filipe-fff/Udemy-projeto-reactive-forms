@@ -12,6 +12,7 @@
         <app-buttons-container
             *ngIf="userSelectedIndex !== undefined"
             [isEditModel]="isEditModel"
+            [enabledButtonSave]="enabledButtonSave"
             (onEditButton)="onEditButton()"
             (onCancelButton)="onCancelButton()"
             (onSaveButton)="onSaveButton()"></app-buttons-container>
@@ -20,6 +21,7 @@
             *ngIf="userSelectedIndex !== undefined"
             [userSelected]="userSelected"
             [isEditModel]="isEditModel"
-            [tabSelectedIndex]="tabSelectedIndex"></app-user-informations-container>
+            [tabSelectedIndex]="tabSelectedIndex"
+            (onEnabledButtonSave)="onEnabledButtonSave($event)"></app-user-informations-container>
     </mat-card>
 </div>
