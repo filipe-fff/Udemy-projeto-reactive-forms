@@ -144,6 +144,10 @@ export class UserFormController {
         return this.userForm.get("contactInformations") as FormGroup;
     }
 
+    get dependentsList(): FormArray {
+        return this.userForm.get("dependentsList") as FormArray;
+    }
+
     get phoneList(): FormArray {
         return this.contactsInformations.get("phoneList") as FormArray;
     }

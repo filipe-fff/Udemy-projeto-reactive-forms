@@ -10,12 +10,14 @@
         </mat-card-content>
 
         <app-buttons-container
+            *ngIf="userSelectedIndex !== undefined"
             [isEditModel]="isEditModel"
             (onEditButton)="onEditButton()"
             (onCancelButton)="onCancelButton()"
             (onSaveButton)="onSaveButton()"></app-buttons-container>
 
         <app-user-informations-container
+            *ngIf="userSelectedIndex !== undefined"
             [userSelected]="userSelected"
             [isEditModel]="isEditModel"
             [tabSelectedIndex]="tabSelectedIndex"></app-user-informations-container>

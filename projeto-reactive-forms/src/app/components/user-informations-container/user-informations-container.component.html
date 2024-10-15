@@ -31,7 +31,7 @@
     <mat-tab>
         <ng-template mat-tab-label>
             Dependente
-            <mat-icon class="mb-2 text-xs text-red-600">circle</mat-icon>
+            <mat-icon *ngIf="depedentsList.invalid" class="mb-2 text-xs text-red-600">circle</mat-icon>
         </ng-template>
         
         <app-dependents-list
