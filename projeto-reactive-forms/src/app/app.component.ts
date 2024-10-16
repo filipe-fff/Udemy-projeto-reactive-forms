@@ -3,6 +3,9 @@ import { take } from 'rxjs';
 import { UsersService } from './services/users.service';
 import { UsersList } from './types/users-list';
 import { IUser } from './interfaces/users/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
+import { IDialogConfirmationData } from './interfaces/dialog-confirmation-data.interface';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +24,7 @@ export class AppComponent implements OnInit {
 
 
   private readonly _usersService = inject(UsersService);
+  private readonly _dialogConfirm = inject(MatDialog);
 
 
   ngOnInit(): void {
@@ -43,13 +47,36 @@ export class AppComponent implements OnInit {
   }
 
   onCancelButton() {
-    this.isEditModel = false;
-    this.userFormUpdate = false;
-    this.userSelected = structuredClone(this.userSelected);
+    if(this.userFormUpdate) {
+      this.openConfirmationsDialog({
+        title: "O Formulário foi alterado",
+        description: "Deseja realmente cancelar as alterações feitas no formulário?",
+      }, (value: boolean) => {
+        if(!value) return;
+  
+        this.isEditModel = false;
+        this.userFormUpdate = false;
+        this.userSelected = structuredClone(this.userSelected);
+      });
+    } else {
+      this.isEditModel = false;
+    }
   }
 
   onSaveButton() {
-    this.userFormUpdate = false;
+    this.openConfirmationsDialog({
+      title: "Confirmar alteração de dados",
+      description: "Deseja realmente salvar os valores alterados?",
+    }, (value: boolean) => {
+      if (!value) {
+        console.log("não salvando.");
+        return;
+      };
+
+        console.log("salvando...");
+        this.isEditModel = false;
+        this.userFormUpdate = false;
+    });
   }
 
   onEnabledButtonSave(enabledButtonSave: boolean) {
@@ -58,5 +85,13 @@ export class AppComponent implements OnInit {
 
   onUserFormFirstValueChanges() {
     this.userFormUpdate = true;
+  }
+
+  private openConfirmationsDialog(data: IDialogConfirmationData, callback: (value: boolean) => void) {
+    const openDialog = this._dialogConfirm.open(DialogConfirmComponent, {
+      data,
+    });
+
+    openDialog.afterClosed().subscribe(callback);
   }
 }

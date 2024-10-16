@@ -31,8 +31,6 @@ export class UserInformationsContainerComponent extends UserFormController imple
 
   ngOnInit(): void {
       this.getCountriesList();
-      this.onUserStatusChanged();
-      this.onUserFormFirstValueChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,6 +43,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
         };
         this.fullfillUserForm(this.userSelected);
         this.getStatesList(this.userSelected.country);
+        this.onUserFormFirstValueChanges();
+        this.onUserStatusChanges();
       }
   }
 
@@ -62,14 +62,14 @@ export class UserInformationsContainerComponent extends UserFormController imple
     this.statesService.getStates(country).pipe(take(1)).subscribe((statesList) => this.statesList = statesList);
   }
 
-  private onUserStatusChanged() {
+  private onUserStatusChanges() {
     this.userForm.statusChanges.pipe(distinctUntilChanged()).subscribe(() => {
       this.onEnabledButtonSaveEmitt.emit(this.userForm.valid);
     });
   }
 
   private onUserFormFirstValueChanges() {
-    this.userFormValueChangesSubs = this.userForm.valueChanges.pipe(take(1)).subscribe(() => {
+    this.userFormValueChangesSubs = this.userForm.valueChanges.subscribe(() => {
       this.onUserFormValueChangesEmitt.emit();
     });
   }

@@ -20,6 +20,7 @@ import { AddressListEditComponent } from './contact-informations-edit/components
 import { PhoneListEditComponent } from './contact-informations-edit/components/phone-list-edit/phone-list-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 
 registerLocaleData(localePT, "pt-BR");
 
@@ -40,6 +41,7 @@ registerLocaleData(localePT, "pt-BR");
     DependentsListEditComponent,
     AddressListEditComponent,
     PhoneListEditComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     CommonModule,

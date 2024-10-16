@@ -11,7 +11,7 @@ export class ButtonsContainerComponent {
 
   @Output("onEditButton") onEditButtonEmitt = new EventEmitter<void>();
   @Output("onCancelButton") onCancelButtonEmitt = new EventEmitter<void>();
-  @Output("onSalveButton") onSalveButtonEmitt = new EventEmitter<void>();
+  @Output("onSaveButton") onSaveButtonEmitt = new EventEmitter<void>();
 
   onEditButton() {
     this.onEditButtonEmitt.emit();
@@ -22,7 +22,6 @@ export class ButtonsContainerComponent {
   }
 
   onSaveButton() {
-    console.log("onSaveButton");
-    this.onSalveButtonEmitt.emit();
+    this.onSaveButtonEmitt.emit();
   }
 }
