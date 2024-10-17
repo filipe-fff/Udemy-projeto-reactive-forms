@@ -1,3 +1,3 @@
-import { IMaritalStatusItem } from "../interfaces/users/marital-status-item.interface";
+import { IMaritalStatusItem } from "../interfaces/user/marital-status-item.interface";
 
 export type MaritalStatusItemList = IMaritalStatusItem[];

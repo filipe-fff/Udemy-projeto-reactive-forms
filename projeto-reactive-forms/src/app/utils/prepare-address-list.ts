@@ -1,6 +1,6 @@
 import { AddressTypeEnum } from "../enums/address-type.enum";
-import { IAddreesToDisplay } from "../interfaces/users/address-to-display.interface";
-import { IAddress } from "../interfaces/users/address.interface";
+import { IAddreesToDisplay } from "../interfaces/user/address-to-display.interface";
+import { IAddress } from "../interfaces/user/address.interface";
 import { AddressList } from "../types/address-list";
 import { AddressTypeDescriptionMap } from "./address-type-description-map";
 

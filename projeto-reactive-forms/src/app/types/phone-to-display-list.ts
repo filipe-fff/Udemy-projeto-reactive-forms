@@ -1,3 +1,3 @@
-import { IPhoneToDisplay } from "../interfaces/users/phone-to-display.interface";
+import { IPhoneToDisplay } from "../interfaces/user/phone-to-display.interface";
 
 export type PhoneToDisplayList = IPhoneToDisplay[];

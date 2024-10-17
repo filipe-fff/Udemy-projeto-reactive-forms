@@ -1,19 +1,20 @@
 import { inject, Injectable } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { IUser } from "../../interfaces/users/user.interface";
+import { IUser } from "../../interfaces/user/user.interface";
 import { preparePhoneList } from "../../utils/prepare-phone-list";
 import { PhoneList } from "../../types/phone-list";
 import { PhoneTypeDescriptionMap } from "../../utils/phone-type-description-map";
-import { IPhoneToDisplay } from "../../interfaces/users/phone-to-display.interface";
+import { IPhoneToDisplay } from "../../interfaces/user/phone-to-display.interface";
 import { convertStringToDate } from "../../utils/converStringToDate";
 import { prepareAddressList } from "../../utils/prepare-address-list";
 import { AddressList } from "../../types/address-list";
-import { IAddress } from "../../interfaces/users/address.interface";
-import { IAddreesToDisplay } from "../../interfaces/users/address-to-display.interface";
+import { IAddress } from "../../interfaces/user/address.interface";
+import { IAddreesToDisplay } from "../../interfaces/user/address-to-display.interface";
 import { error } from "console";
 import { requiredAddressValidator } from "../../utils/validators/required-address-validator";
 import { DependentsList } from "../../types/dependents-list";
-import { IDependent } from "../../interfaces/users/dependent.interface";
+import { IDependent } from "../../interfaces/user/dependent.interface";
+import { UserFormRawValue } from "../../services/user-form-raw-value.service";
 
 @Injectable({
     providedIn: "root",
@@ -23,6 +24,7 @@ export class UserFormController {
     emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     private readonly _fb = inject(FormBuilder);
+    private readonly _userFormService = inject(UserFormRawValue);
 
     constructor() {
         this.createUserFormGroup();
@@ -65,6 +67,10 @@ export class UserFormController {
 
     onRemoveDependent(dependentIndex: number) {
         this.depedentsList.removeAt(dependentIndex);
+    }
+
+    onUserFormRawValue() {
+        this._userFormService.userForm = this.userForm.getRawValue();
     }
 
     private fullfillResetUserForm() {

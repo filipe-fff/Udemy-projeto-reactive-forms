@@ -1,5 +1,5 @@
 import { MaritalStatusEnum } from "../enums/marital-status.enum";
-import { IMaritalStatusItem } from "../interfaces/users/marital-status-item.interface";
+import { IMaritalStatusItem } from "../interfaces/user/marital-status-item.interface";
 import { MaritalStatusDescriptionMap } from "./marital-status-description-map";
 
 export const prepareMaritalStatusList = (callback: (maritalStatus: IMaritalStatusItem) => void) => {

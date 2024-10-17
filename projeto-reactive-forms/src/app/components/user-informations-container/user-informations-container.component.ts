@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { IUser } from '../../interfaces/users/user.interface';
+import { IUser } from '../../interfaces/user/user.interface';
 import { UserFormController } from './user-form-controller';
 import { CountriesService } from '../../services/countries.service';
 import { StatesService } from '../../services/states.service';
@@ -38,9 +38,9 @@ export class UserInformationsContainerComponent extends UserFormController imple
       const HAS_USER_SELECTED = changes["userSelected"] && Object.keys(changes["userSelected"].currentValue).length > 0;
 
       if (HAS_USER_SELECTED) {
-        if(this.userFormValueChangesSubs) {
-          this.userFormValueChangesSubs.unsubscribe()
-        };
+        if(this.userFormValueChangesSubs) this.userFormValueChangesSubs.unsubscribe();
+
+
         this.fullfillUserForm(this.userSelected);
         this.getStatesList(this.userSelected.country);
         this.onUserFormFirstValueChanges();
@@ -71,6 +71,7 @@ export class UserInformationsContainerComponent extends UserFormController imple
   private onUserFormFirstValueChanges() {
     this.userFormValueChangesSubs = this.userForm.valueChanges.subscribe(() => {
       this.onUserFormValueChangesEmitt.emit();
+      this.onUserFormRawValue();
     });
   }
 }

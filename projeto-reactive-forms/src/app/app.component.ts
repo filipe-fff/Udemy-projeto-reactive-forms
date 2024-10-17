@@ -2,10 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { UsersService } from './services/users.service';
 import { UsersList } from './types/users-list';
-import { IUser } from './interfaces/users/user.interface';
+import { IUser } from './interfaces/user/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 import { IDialogConfirmationData } from './interfaces/dialog-confirmation-data.interface';
+import { UserFormRawValue } from './services/user-form-raw-value.service';
+import { IUserForm } from './interfaces/user-form/user-form.interface';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +23,12 @@ export class AppComponent implements OnInit {
   isEditModel: boolean = false;
   enabledButtonSave!: boolean;
   userFormUpdate = false;
+  userFormRawValue: IUserForm = {} as IUserForm;
 
 
   private readonly _usersService = inject(UsersService);
   private readonly _dialogConfirm = inject(MatDialog);
+  private readonly _userFormService = inject(UserFormRawValue);
 
 
   ngOnInit(): void {
@@ -58,9 +62,8 @@ export class AppComponent implements OnInit {
         this.userFormUpdate = false;
         this.userSelected = structuredClone(this.userSelected);
       });
-    } else {
-      this.isEditModel = false;
-    }
+    } else
+        this.isEditModel = false;
   }
 
   onSaveButton() {
@@ -68,14 +71,11 @@ export class AppComponent implements OnInit {
       title: "Confirmar alteração de dados",
       description: "Deseja realmente salvar os valores alterados?",
     }, (value: boolean) => {
-      if (!value) {
-        console.log("não salvando.");
-        return;
-      };
+      if (!value) return;
 
-        console.log("salvando...");
         this.isEditModel = false;
         this.userFormUpdate = false;
+        this.onUserFormRawValue(this._userFormService.userForm);
     });
   }
 
@@ -85,6 +85,10 @@ export class AppComponent implements OnInit {
 
   onUserFormFirstValueChanges() {
     this.userFormUpdate = true;
+  }
+
+  private onUserFormRawValue(userFormResponse: IUserForm) {
+    this.userFormRawValue = userFormResponse;
   }
 
   private openConfirmationsDialog(data: IDialogConfirmationData, callback: (value: boolean) => void) {
