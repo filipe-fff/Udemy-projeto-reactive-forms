@@ -4,5 +4,5 @@ export const convertStringToDate = (date: string): Date => {
 
     if (day && month && year) return new Date(year, month + 1, day);
 
-    return new Date
+    return new Date;
 }

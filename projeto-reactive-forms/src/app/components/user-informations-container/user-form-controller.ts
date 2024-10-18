@@ -8,9 +8,7 @@ import { IPhoneToDisplay } from "../../interfaces/user/phone-to-display.interfac
 import { convertStringToDate } from "../../utils/conver-string-to-date";
 import { prepareAddressList } from "../../utils/prepare-address-list";
 import { AddressList } from "../../types/address-list";
-import { IAddress } from "../../interfaces/user/address.interface";
 import { IAddreesToDisplay } from "../../interfaces/user/address-to-display.interface";
-import { error } from "console";
 import { requiredAddressValidator } from "../../utils/validators/required-address-validator";
 import { DependentsList } from "../../types/dependents-list";
 import { IDependent } from "../../interfaces/user/dependent.interface";
@@ -96,7 +94,7 @@ export class UserFormController {
     private fulfillPhoneList(phoneListResponse: PhoneList) {
         preparePhoneList(phoneListResponse, false, (phone) => {
             this.phoneList.push(this.addPhone(phone));
-        });
+        })
     }
 
     private addPhone(phone: IPhoneToDisplay): FormGroup {
@@ -112,7 +110,7 @@ export class UserFormController {
     private fulfillAddressList(addressResponse: AddressList) {
         prepareAddressList(addressResponse, false, (address) => {
             this.addressList.push(this.addAddress(address));
-        });
+        })
     }
 
     private addAddress(address: IAddreesToDisplay): FormGroup {
@@ -124,7 +122,7 @@ export class UserFormController {
             country: [address.country],
             state: [address.state],
             city: [address.city],
-        }, {validators: requiredAddressValidator})
+        }, {validators: requiredAddressValidator});
     }
 
     private fulfillDependentList(dependentsResponse: DependentsList) {

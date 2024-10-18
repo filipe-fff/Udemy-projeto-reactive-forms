@@ -20,7 +20,6 @@ export const convertUserFormToUser = (userForm: IUserForm): Partial<IUser> => {
 };
 
 const generalInformations = (userForm: IUserForm): Partial<IUser> => {
-    console.log(userForm);
     return({
         name: userForm.generalInformations.name,
         email: userForm.generalInformations.email,
@@ -33,9 +32,7 @@ const generalInformations = (userForm: IUserForm): Partial<IUser> => {
 }
 
 const phoneList = (userForm: IUserForm): PhoneList => {
-    console.log(userForm.contactInformations);
     return userForm.contactInformations.phoneList.map((phone: IPhoneToDisplay) => {
-        console.log("phoneNumber =>", phone.number);
         const areaCode = `+${phone.number.slice(0, 2)}`;
         const internationalCode = `${phone.number.slice(2, 4)}`;
         const number = `${phone.number.slice(4, -4)}-${phone.number.slice(-4)}`;

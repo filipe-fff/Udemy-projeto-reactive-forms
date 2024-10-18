@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { StatesList } from "../types/states-list";
 import { IStatesResponse } from "../interfaces/states/states-response.interface";

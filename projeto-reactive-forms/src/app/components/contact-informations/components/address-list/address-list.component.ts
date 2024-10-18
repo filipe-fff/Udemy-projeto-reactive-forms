@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AddressList } from '../../../../types/address-list';
 import { prepareAddressList } from '../../../../utils/prepare-address-list';
-import { IAddreesToDisplay } from '../../../../interfaces/user/address-to-display.interface';
 import { AddressToDisplayList } from '../../../../types/address-to-display-list';
 
 @Component({

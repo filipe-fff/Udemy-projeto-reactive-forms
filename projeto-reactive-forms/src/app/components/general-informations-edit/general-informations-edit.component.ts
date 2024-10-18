@@ -5,8 +5,6 @@ import { StatesList } from '../../types/states-list';
 import { ICountry } from '../../interfaces/countries/country.interface';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { IState } from '../../interfaces/states/state.interface';
-import { MaritalStatusEnum } from '../../enums/marital-status.enum';
-import { MaritalStatusDescriptionMap } from '../../utils/marital-status-description-map';
 import { prepareMaritalStatusList } from '../../utils/prepare-marital-status-list';
 import { MaritalStatusItemList } from '../../types/marital-status-item-list';
 
@@ -22,7 +20,7 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
   maritalStatusList: MaritalStatusItemList = [];
 
   @Input({ required: true }) countriesList: CountriesList = [];
-  @Input({ required: true }) statesList: StatesList = []
+  @Input({ required: true }) statesList: StatesList = [];
   @Input({ required: true }) userForm!: FormGroup;
 
   @Output("onCountrySelected") onUserSelectedEmmit = new EventEmitter<string>();

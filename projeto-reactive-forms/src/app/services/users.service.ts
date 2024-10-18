@@ -147,7 +147,7 @@ export class UsersService {
             setTimeout( () => {
                 observable.next(this.usersList);
                 observable.complete();
-            }, 500)
+            }, 500);
         });
     }
 }
