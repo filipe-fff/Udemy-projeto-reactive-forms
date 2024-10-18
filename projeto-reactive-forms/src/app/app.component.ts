@@ -8,6 +8,7 @@ import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confi
 import { IDialogConfirmationData } from './interfaces/dialog-confirmation-data.interface';
 import { UserFormRawValue } from './services/user-form-raw-value.service';
 import { IUserForm } from './interfaces/user-form/user-form.interface';
+import { convertUserFormToUser } from './utils/convert-user-form-to-user';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
   enabledButtonSave!: boolean;
   userFormUpdate = false;
   userFormRawValue: IUserForm = {} as IUserForm;
+  newUser: IUser = {} as IUser;
 
 
   private readonly _usersService = inject(UsersService);
@@ -89,6 +91,8 @@ export class AppComponent implements OnInit {
 
   private onUserFormRawValue(userFormResponse: IUserForm) {
     this.userFormRawValue = userFormResponse;
+    this.newUser = convertUserFormToUser(this.userFormRawValue) as IUser;
+    console.log("newUser =>", this.newUser);
   }
 
   private openConfirmationsDialog(data: IDialogConfirmationData, callback: (value: boolean) => void) {

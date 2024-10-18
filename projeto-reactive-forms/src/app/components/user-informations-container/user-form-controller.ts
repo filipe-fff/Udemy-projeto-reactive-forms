@@ -5,7 +5,7 @@ import { preparePhoneList } from "../../utils/prepare-phone-list";
 import { PhoneList } from "../../types/phone-list";
 import { PhoneTypeDescriptionMap } from "../../utils/phone-type-description-map";
 import { IPhoneToDisplay } from "../../interfaces/user/phone-to-display.interface";
-import { convertStringToDate } from "../../utils/converStringToDate";
+import { convertStringToDate } from "../../utils/conver-string-to-date";
 import { prepareAddressList } from "../../utils/prepare-address-list";
 import { AddressList } from "../../types/address-list";
 import { IAddress } from "../../interfaces/user/address.interface";
@@ -28,6 +28,8 @@ export class UserFormController {
 
     constructor() {
         this.createUserFormGroup();
+
+        this.userForm.markAsTouched();
     }
 
     createUserFormGroup() {
@@ -103,7 +105,7 @@ export class UserFormController {
         return this._fb.group({
             type: [phone.type],
             typeDescription: [phone.typeDescription],
-            number: [phone.phoneNumber, validator],
+            number: [phone.number, validator],
         });
     }
 

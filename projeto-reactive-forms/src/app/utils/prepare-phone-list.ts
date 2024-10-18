@@ -11,17 +11,17 @@ export const preparePhoneList = (phoneList: PhoneList, isToDisplay: boolean, cal
         
         const phoneFound = phoneList.find((phone) => phone.type === phoneType);
 
-        let phoneNumber = "";
+        let number = "";
 
         if (isToDisplay)
-            phoneNumber = phoneFound? convertPhoneToDisplay(phoneFound) : "-";
+            number = phoneFound? convertPhoneToDisplay(phoneFound) : "-";
         else
-            phoneNumber = phoneFound? convertPhoneToEdit(phoneFound): "";
+            number = phoneFound? convertPhoneToEdit(phoneFound): "";
 
         calback({
             type: phoneType,
             typeDescription: PhoneTypeDescriptionMap[phoneType as PhoneTypeEnum],
-            phoneNumber,
+            number,
         });
     });
 }

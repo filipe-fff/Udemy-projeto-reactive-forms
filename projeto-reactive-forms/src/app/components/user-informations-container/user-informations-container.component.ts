@@ -45,6 +45,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
         this.getStatesList(this.userSelected.country);
         this.onUserFormFirstValueChanges();
         this.onUserStatusChanges();
+
+        this.onUserFormRawValue();
       }
   }
 

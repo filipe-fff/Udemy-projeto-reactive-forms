@@ -24,7 +24,7 @@ export class PhoneListComponent implements OnChanges {
               this.phoneToDisplayList.push({
                 type: phone.type,
                 typeDescription: phone.typeDescription,
-                phoneNumber: phone.phoneNumber,
+                number: phone.number,
               });
         })  
       }
