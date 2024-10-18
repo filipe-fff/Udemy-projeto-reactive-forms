@@ -1,6 +1,9 @@
 import { IUserForm } from "../interfaces/user-form/user-form.interface";
+import { IDependent } from "../interfaces/user/dependent.interface";
 import { IPhoneToDisplay } from "../interfaces/user/phone-to-display.interface";
 import { IUser } from "../interfaces/user/user.interface";
+import { AddressList } from "../types/address-list";
+import { DependentsList } from "../types/dependents-list";
 import { PhoneList } from "../types/phone-list";
 import { convertDateToString } from "./convert-date-to-string";
 
@@ -10,6 +13,8 @@ export const convertUserFormToUser = (userForm: IUserForm): Partial<IUser> => {
 
     newUser = generalInformations(userForm);
     newUser.phoneList = phoneList(userForm);
+    newUser.addressList = addressList(userForm);
+    newUser.dependentsList = dependentsList(userForm);
 
     return newUser;
 };
@@ -42,4 +47,18 @@ const phoneList = (userForm: IUserForm): PhoneList => {
             number,
         }
     }).filter((phone) => phone.internationalCode.length > 0);
+}
+
+const addressList = (userForm: IUserForm): AddressList => {
+    return userForm.contactInformations.addressList.filter((address) => address.city);
+}
+
+const dependentsList = (userForm: IUserForm): DependentsList => {
+    return userForm.dependentsList.map((dependent: IDependent) => {
+        return {
+            name: dependent.name,
+            age: +dependent.age,
+            document: +dependent.document,
+        }
+    });
 }

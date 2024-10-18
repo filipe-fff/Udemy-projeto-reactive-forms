@@ -9,6 +9,7 @@ import { IDialogConfirmationData } from './interfaces/dialog-confirmation-data.i
 import { UserFormRawValue } from './services/user-form-raw-value.service';
 import { IUserForm } from './interfaces/user-form/user-form.interface';
 import { convertUserFormToUser } from './utils/convert-user-form-to-user';
+import { UpdateUserService } from './services/update-user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,19 +19,19 @@ import { convertUserFormToUser } from './utils/convert-user-form-to-user';
 export class AppComponent implements OnInit {
   usersList: UsersList = [];
   userSelected: IUser = {} as IUser;
-  userSelectedIndex: number | undefined;
+  userSelectedIndex!: number;
   tabSelectedIndex: number = 0;
 
   isEditModel: boolean = false;
   enabledButtonSave!: boolean;
   userFormUpdate = false;
-  userFormRawValue: IUserForm = {} as IUserForm;
   newUser: IUser = {} as IUser;
 
 
   private readonly _usersService = inject(UsersService);
   private readonly _dialogConfirm = inject(MatDialog);
   private readonly _userFormService = inject(UserFormRawValue);
+  private readonly _userUpdate = inject(UpdateUserService);
 
 
   ngOnInit(): void {
@@ -89,17 +90,23 @@ export class AppComponent implements OnInit {
     this.userFormUpdate = true;
   }
 
-  private onUserFormRawValue(userFormResponse: IUserForm) {
-    this.userFormRawValue = userFormResponse;
-    this.newUser = convertUserFormToUser(this.userFormRawValue) as IUser;
-    console.log("newUser =>", this.newUser);
-  }
-
   private openConfirmationsDialog(data: IDialogConfirmationData, callback: (value: boolean) => void) {
     const openDialog = this._dialogConfirm.open(DialogConfirmComponent, {
       data,
     });
-
+    
     openDialog.afterClosed().subscribe(callback);
+  }
+
+  private onUserFormRawValue(userFormResponse: IUserForm) {
+    const userFormRawValue: IUser = convertUserFormToUser(userFormResponse) as IUser;
+    this._userUpdate.getUpdateUser(userFormRawValue).subscribe((newUserResponse: IUser) => {
+      this.newUser = newUserResponse;
+    });
+    this.onUpdateNewUser(this.newUser);
+  }
+
+  private onUpdateNewUser(newUser: IUser) {
+      this.usersList[this.userSelectedIndex] = structuredClone(newUser);
   }
 }
